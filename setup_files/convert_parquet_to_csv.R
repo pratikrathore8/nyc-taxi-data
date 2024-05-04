@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript --vanilla
+#!/usr/local/bin/Rscript --vanilla
 
 required_packages = c(
   "arrow",

@@ -16,7 +16,7 @@ mkdir -p "$download_directory"
 mkdir -p "$temp_directory"
 
 # Directory to move the downloaded files to
-move_directory="/Users/Pratik/Library/CloudStorage/GoogleDrive-pratikr@stanford.edu/My\ Drive/taxi-data"
+move_directory="/Users/Pratik/Library/CloudStorage/GoogleDrive-pratikr@stanford.edu/My Drive/taxi-data"
 
 # Read each line from the file
 while IFS= read -r url
@@ -47,7 +47,7 @@ do
     mv "$temp_directory$base_name.h5py" "$move_directory"
 
     # Delete the database
-    psql postgres -c "DROP DATABASE nyc-taxi-data;"
+    psql postgres -c "DROP DATABASE \"nyc-taxi-data\";"
 
     # Delete the .csv and .csv.gz files in the temporary directory
     find "$temp_directory" -type f \( -name "*.csv" -o -name "*.csv.gz" \) -delete
