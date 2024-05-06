@@ -8,6 +8,12 @@ shp2pgsql -s 2263:4326 -I shapefiles/taxi_zones/taxi_zones.shp | psql -d nyc-tax
 psql nyc-taxi-data -c "CREATE INDEX ON taxi_zones (locationid);"
 psql nyc-taxi-data -c "VACUUM ANALYZE taxi_zones;"
 
+# Add a new column for centroids and populate it
+psql nyc-taxi-data -c "
+  ALTER TABLE taxi_zones ADD COLUMN geom_centroid GEOMETRY(Point, 4326);
+  UPDATE taxi_zones SET geom_centroid = ST_Centroid(geom);
+"
+
 shp2pgsql -s 2263:4326 -I shapefiles/nyct2010_15b/nyct2010.shp | psql -d nyc-taxi-data
 psql nyc-taxi-data -f setup_files/add_newark_airport.sql
 psql nyc-taxi-data -c "CREATE INDEX ON nyct2010 (ntacode);"

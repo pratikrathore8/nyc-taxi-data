@@ -49,8 +49,11 @@ do
     # Delete the database
     psql postgres -c "DROP DATABASE \"nyc-taxi-data\";"
 
-    # Delete the .csv and .csv.gz files in the temporary directory
-    find "$temp_directory" -type f \( -name "*.csv" -o -name "*.csv.gz" \) -delete
+    # Delete the temporary directory
+    rm -rf "$temp_directory"
+
+    # # Delete the .csv and .csv.gz files in the temporary directory
+    # find "$temp_directory" -type f \( -name "*.csv" -o -name "*.csv.gz" \) -delete
 
     # Pause for 2 seconds before the next download
     sleep 2
